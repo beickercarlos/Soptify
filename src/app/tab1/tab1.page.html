@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Soptify
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-no-padding" *ngFor="let entry of data; letisFirst = first">
+    <!-- Section Title -->
+    <ion-col size="9">
+      <h2 class="section-header">{{ entry.title }}</h2>
+    </ion-col>
+    <ion-col size="3" class="ion-text-end">
+      <ion-button fill="clear" color="light" *ngIf="isFirst">
+        <ion-icon name="settings-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+
+    <!-- Horizontal scroll view -->
+    <swiper-container [options]="opts">
+      <swiper-slide *ngFor="let album of entry.albums" tappable (click)="openAlbum(album)">
+        <img [src]="'/assets/images/albums/'+dasherize(album.image)+'.jpg'">
+        <span class="title">{{ album.title }}</span>
+      </swiper-slide>
+
+    </swiper-container>
+  </ion-row>
+</ion-content>
